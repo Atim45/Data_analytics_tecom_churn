@@ -1,57 +1,18 @@
 <div align="center">
 
-# 📡 Telecom Customer Churn Prediction
+# Telecom Customer Churn — End-to-End Data & ML Project
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![LightGBM](https://img.shields.io/badge/LightGBM-3.3.5-blue?style=for-the-badge&logo=microsoft&logoColor=white)](https://lightgbm.readthedocs.io)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.104-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.28-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
-[![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Stars](https://img.shields.io/github/stars/Tavishi-Jain/telecom-churn-prediction?style=for-the-badge&color=gold)](https://github.com/Tavishi-Jain/telecom-churn-prediction/stargazers)
-
-<br/>
-
-> **🚀 End-to-end production-grade ML system predicting telecom customer churn across India's top 4 carriers — with real-time API inference, interactive dashboards, and explainable AI.**
-
-<br/>
-
-[🔴 Live Demo](#-live-demo) · [📖 Documentation](docs/) · [🐛 Report Bug](https://github.com/Tavishi-Jain/telecom-churn-prediction/issues) · [✨ Request Feature](https://github.com/Tavishi-Jain/telecom-churn-prediction/issues)
-
+**Churn analysis → PostgreSQL data warehouse (ETL) → BI dashboards*
 </div>
 
 ---
-
-## 📑 Table of Contents
-
-- [Project Overview](#-project-overview)
-- [Live Demo](#-live-demo)
-- [Key Results](#-key-results)
-- [Architecture](#️-architecture)
-- [Folder Structure](#-folder-structure)
-- [Installation](#-installation)
-- [Quick Start](#⚡-quick-start)
-- [Project Files](#-project-files-explained)
-- [ML Pipeline](#-ml-pipeline)
-- [API Reference](#-api-reference)
-- [Dashboards](#-dashboards)
-- [Technology Stack](#️-technology-stack)
-- [Business Insights](#-business-insights)
-- [Interview Q&A](#-interview-qa)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Contact](#-contact)
-
----
-
-## 🎯 Project Overview
+## Project Overview
 
 ### The Business Problem
 
-In India's hyper-competitive telecom market, customer churn costs the industry an estimated **₹14,000+ crore annually**. With Reliance Jio, Airtel, Vodafone, and BSNL fighting for every subscriber, identifying at-risk customers **before** they leave is the difference between sustainable growth and revenue bleed.
+In India's hyper-competitive telecom market, customer churn directly erodes Monthly Recurring Revenue. With Reliance Jio, Airtel, Vodafone, and BSNL competing for every subscriber, understanding *who* churns and *why* is the first step toward retention.
 
 This project builds a **production-grade churn prediction system** that:
-
 - 🔮 **Predicts** which of 243,553 subscribers will churn in the next 30 days
 - 🧠 **Explains** *why* each customer is at risk using SHAP values
 - ⚡ **Serves predictions** in real-time via a FastAPI REST endpoint
@@ -59,35 +20,39 @@ This project builds a **production-grade churn prediction system** that:
 - 🗄️ **Persists all data** in a PostgreSQL data warehouse
 - 🐳 **Deploys** everything via Docker for reproducible, scalable inference
 
-### What Makes This Special
+This project analyzes **243,553 Indian telecom subscribers** end-to-end across three connected pathways:
 
-| Traditional Approach | This Project |
-|---|---|
-| Single model, no comparison | 10 models compared systematically |
-| Imbalanced data ignored | 8 balancing strategies evaluated |
-| Black-box predictions | Full SHAP explainability |
-| Manual retraining | Optuna automated hyperparameter tuning |
-| Jupyter-only | Production FastAPI + Streamlit deployment |
-| No SQL integration | Full PostgreSQL data warehouse |
-| Single dashboard | Power BI + Tableau + Excel + Streamlit |
+1. **`telecom_churn_analysis.ipynb`** — the flagship notebook: EDA, feature engineering, an 8-technique class-balancing experiment, a 10-model comparison bake-off, Optuna tuning, and SHAP explainability.
+2. **`etl/` pipeline + `sql/` scripts** — extracts, cleans, and loads the same source data into a PostgreSQL **star-schema warehouse** (SCD Type-2 customers, partitioned fact table, engineered features computed in-warehouse too).
+3. **Dashboards** — Power BI, Tableau, and Excel dashboards built directly on top of that warehouse.
+
+```mermaid
+flowchart LR
+    A[("📄 Raw Telecom CSV\n243,553 rows")] --> B["📓 Notebook\nEDA · Modeling · SHAP"]
+    A --> C["etl/ pipeline"]
+    C --> D[("PostgreSQL\nStar-Schema Warehouse")]
+    D --> E["Power BI"]
+    D --> F["Tableau"]
+    D --> G["Excel"]
+```
+---
+## 📑 Table of Contents
+
+- [Project Overview]
+- [Key Results]
+- [Folder Structure]
+- [Installation]
+- [Quick Start]
+- [Project Files]
+- [ML Pipeline] 
+- [Dashboards]
+- [Business Insights]
+- [License]
+- [Contact](#-contact)
 
 ---
 
-## 🔴 Live Demo
-
-> 🚧 **Deployment in progress** — Demos will be live at:
-
-| Interface | URL | Status |
-|---|---|---|
-| 🤖 FastAPI Swagger UI | `https://api.telecom-churn.example.com/docs` | 🔶 Coming Soon |
-| 🎈 Streamlit Dashboard | `https://telecom-churn.streamlit.app` | 🔶 Coming Soon |
-| 📊 Power BI Report | [Publish Link](#) | 🔶 Coming Soon |
-
-**Run locally in 60 seconds** → See [Quick Start](#⚡-quick-start)
-
----
-
-## 📈 Key Results
+## Key Results 
 
 <div align="center">
 
@@ -107,16 +72,17 @@ This project builds a **production-grade churn prediction system** that:
 ### 🔢 Project Scale
 
 ```
-📦 Dataset          243,553 subscribers × 28 raw features
-📊 Churn Rate       20.05% (severe class imbalance)
-🏢 Telecom Partners Reliance Jio · Airtel · Vodafone · BSNL
-🔧 Features Made    11 engineered features
-⚖️ Balancing Tried  8 techniques (SMOTE, ADASYN, RUS, NearMiss...)
-🤖 Models Compared  10 (LR, RF, XGB, LGB, CatBoost, SVM, KNN, NB, DT, MLP)
-🎛️ HPO Trials       100 Optuna trials, TPE sampler
-📡 API Endpoints    6 REST endpoints, <50ms p99 latency
-```
 
+Dataset          243,553 subscribers × 28 raw features
+Churn Rate       20.05% (severe class imbalance)
+Telecom Partners Reliance Jio · Airtel · Vodafone · BSNL
+Features Made    11 engineered features
+Balancing Tried  8 techniques (SMOTE, ADASYN, RUS, NearMiss...)
+Models Compared  10 (LR, RF, XGB, LGB, CatBoost, SVM, KNN, NB, DT, MLP)
+HPO Trials       100 Optuna trials, TPE sampler
+API Endpoints    6 REST endpoints, <50ms p99 latency
+
+```
 ### 📊 Balancing Technique Leaderboard
 
 | Rank | Technique | F1-Score | ROC-AUC | Notes |
@@ -147,255 +113,367 @@ This project builds a **production-grade churn prediction system** that:
 
 ---
 
-## 🏗️ Architecture
+## Folder Structure
 
-```mermaid
-flowchart TB
-    subgraph Sources["📥 Data Sources"]
-        A1[("📱 CRM System\n243K Records")]
-        A2[("📊 Usage Logs\nCall/Data/SMS")]
-        A3[("💳 Billing DB\nPayment History")]
-    end
-
-    subgraph Ingestion["🔄 Data Engineering"]
-        B1["🐍 Python ETL\n(Pandas + NumPy)"]
-        B2[("🐘 PostgreSQL\nData Warehouse")]
-        B3["📝 SQL Scripts\n(Views + Aggregates)"]
-    end
-
-    subgraph ML["🧠 ML Pipeline"]
-        C1["🔍 EDA\n(Profiling + Viz)"]
-        C2["⚙️ Feature Engineering\n(11 Features)"]
-        C3["⚖️ SMOTE Balancing\n(20% → 50%)"]
-        C4["🎛️ Optuna HPO\n(100 Trials)"]
-        C5["🏆 LightGBM\n(Winner Model)"]
-        C6["🔬 SHAP Analysis\n(Explainability)"]
-    end
-
-    subgraph Serving["🚀 Model Serving"]
-        D1["⚡ FastAPI\n(REST API)"]
-        D2["🎈 Streamlit\n(Interactive UI)"]
-        D3["🐳 Docker\n(Containers)"]
-    end
-
-    subgraph Dashboards["📊 Business Intelligence"]
-        E1["📊 Power BI\n(Executive KPIs)"]
-        E2["📈 Tableau\n(Analyst Drilldown)"]
-        E3["📋 Excel\n(Operations)"]
-    end
-
-    Sources --> Ingestion
-    B1 --> B2
-    B2 --> B3
-    Ingestion --> ML
-    C1 --> C2 --> C3 --> C4 --> C5 --> C6
-    C5 --> Serving
-    D1 & D2 --> D3
-    B2 --> Dashboards
-
-    style Sources fill:#e8f5e9,stroke:#2e7d32
-    style ML fill:#e3f2fd,stroke:#1565c0
-    style Serving fill:#fce4ec,stroke:#b71c1c
-    style Dashboards fill:#fff8e1,stroke:#e65100
-```
-
+Data_analytics_telecom_churn/
+│
+├── app/                                    # FastAPI application
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   ├── nginx.conf
+│   ├── main.py
+│   ├── models.py
+│   ├── logger.py
+│   ├── telecom_churn_pipeline.joblib
+│   ├── requirements.txt
+│   └── .env.example
+│
+├── etl/                                    # ETL Pipeline
+│   ├── config/
+│   │   ├── config.py
+│   │   ├── settings.py
+│   │   └── .env
+│   │
+│   ├── data/
+│   │   └── telecom_churn.csv
+│   │
+│   ├── etl/
+│   │   ├── __init__.py
+│   │   ├── extract.py
+│   │   ├── clean.py
+│   │   ├── transform.py
+│   │   ├── db.py
+│   │   ├── load_dimensions.py
+│   │   ├── load_facts.py
+│   │   ├── validate.py
+│   │   └── validate_db.py
+│   │
+│   ├── logs/
+│   ├── reports/
+│   ├── utils/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── env.example
+│
+├── sql_script/                             # PostgreSQL Warehouse
+│   ├── 01_schema.sql
+│   ├── 02_views_and_procedures.sql
+│   └── 03_analytics_queries.sql
+│
+├── Dashboards/
+│   ├── Power BI Dashboard.pbix
+│   ├── Telecom_Churn_Dashboard_excel.xlsx
+│   └── Telecom_churn_dashboard_tableau.twb
+│
+├── streamlit_app/                          # Streamlit prediction dashboard
+│   ├── app.py
+│   ├── requirements.txt
+│   └── README.md
+│
+├── docs/
+│   ├── business_report.md
+│   └── technical_report.md
+│
+├── CapturesGraphs/                         # Screenshots used in README
+│   ├── EDA Visualizations
+│   ├── Model Evaluation
+│   ├── SHAP Explainability
+│   ├── Dashboard Images
+│   └── API Output Screenshots
+│
+├── telecom_churn_analysis.ipynb            # Complete ML workflow
+├── train_and_export_model.py               # Train & export pipeline
+├── model_metadata.json
+├── README.md
+├── requirements.txt
+├── LICENSE
+├── .gitignore
+└── .gitattributes
 ---
-
-## 📁 Folder Structure
-
-```
-telecom-churn-prediction/
-│
-├── 📓 notebooks/
-│   └── telecom_churn_analysis.ipynb     # Main analysis (1,200+ lines)
-│
-├── 🗄️ sql/
-│   ├── create_tables.sql                # Schema + indexes
-│   ├── feature_views.sql                # Business feature views
-│   ├── churn_analysis_queries.sql       # EDA queries
-│   └── stored_procedures.sql           # Batch scoring procs
-│
-├── 🚀 api/
-│   ├── main.py                          # FastAPI application
-│   ├── models.py                        # Pydantic schemas
-│   ├── predictor.py                     # Model inference logic
-│   └── requirements.txt                # API dependencies
-│
-├── 🎈 dashboard/
-│   └── streamlit_app.py                 # Streamlit dashboard
-│
-├── 📊 bi_dashboards/
-│   ├── telecom_churn_powerbi.pbix       # Power BI file
-│   ├── telecom_churn_tableau.twbx       # Tableau workbook
-│   └── telecom_churn_excel.xlsx         # Excel dashboard
-│
-├── 🤖 models/
-│   └── lgbm_churn_model.pkl             # Trained model artifact
-│
-├── 📚 docs/
-│   ├── architecture.md                  # System architecture
-│   ├── business_report.md               # Executive report
-│   ├── technical_report.md              # ML technical report
-│   ├── interview_prep.md                # 30 Q&As for interviews
-│   ├── api_documentation.md             # Full API reference
-│   └── presentation_script.md          # 15-slide presenter notes
-│
-├── 🐳 docker/
-│   ├── Dockerfile                       # API container
-│   ├── docker-compose.yml               # Full stack deployment
-│   └── .env.example                    # Environment template
-│
-├── ⚙️ config/
-│   └── config.yaml                     # Project configuration
-│
-├── 🔧 scripts/
-│   ├── train.py                         # Model training script
-│   ├── evaluate.py                      # Evaluation script
-│   └── predict_batch.py                # Batch prediction
-│
-├── 📋 README.md                         # This file
-├── 📋 CONTRIBUTING.md                   # Contribution guidelines
-├── 📋 CHANGELOG.md                      # Version history
-├── 📋 LICENSE                           # MIT License
-├── 🙈 .gitignore                        # Git ignore rules
-└── 📦 requirements.txt                  # Python dependencies
-```
-
----
-
-## 🔧 Installation
+## Installation
 
 ### Prerequisites
 
+Ensure you have the following installed:
+- **Python 3.10+** — [Download](https://www.python.org/downloads/)
+- **PostgreSQL 15+** — [Download](https://www.postgresql.org/download/)
+- **Git** — [Download](https://git-scm.com/)
+
+Verify installations:
 ```bash
-# Check Python version (3.10+ required)
 python --version
-
-# Check pip
-pip --version
-
-# Check Docker (optional, for containerized deployment)
-docker --version
+psql --version
+git --version
 ```
+
+---
 
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/Tavishi-Jain/telecom-churn-prediction.git
-cd telecom-churn-prediction
+git clone <your-repository-url>
+cd Data_analytics_telecom_churn
 ```
 
-### Step 2: Create Virtual Environment
+---
 
+### Step 2: Create a Virtual Environment
+
+**Windows:**
 ```bash
-# Windows
-python -m venv venv
-venv\Scripts\activate
-
-# macOS / Linux
-python -m venv venv
-source venv/bin/activate
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
-### Step 3: Install Dependencies
+**macOS / Linux:**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+---
+
+### Step 3: Install Python Dependencies
 
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Step 4: Set Up Environment Variables
-
+For the ETL pipeline specifically:
 ```bash
-cp docker/.env.example .env
-# Edit .env with your PostgreSQL credentials and model path
-```
-
-### Step 5: Set Up PostgreSQL (Optional)
-
-```bash
-# Using Docker
-docker run -d \
-  --name telecom_pg \
-  -e POSTGRES_USER=telecom_user \
-  -e POSTGRES_PASSWORD=your_password \
-  -e POSTGRES_DB=telecom_churn \
-  -p 5432:5432 \
-  postgres:15
-
-# Then run schema
-psql -U telecom_user -d telecom_churn -f sql/create_tables.sql
-psql -U telecom_user -d telecom_churn -f sql/feature_views.sql
-```
-
----
-
-## ⚡ Quick Start
-
-**5 commands to get everything running:**
-
-```bash
-# 1. Clone & enter
-git clone https://github.com/Tavishi-Jain/telecom-churn-prediction.git && cd telecom-churn-prediction
-
-# 2. Install dependencies
+cd etl
 pip install -r requirements.txt
-
-# 3. Launch FastAPI server
-uvicorn api.main:app --reload --port 8000
-
-# 4. Launch Streamlit dashboard (new terminal)
-streamlit run dashboard/streamlit_app.py
-
-# 5. Test the API
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"customer_id": "C001", "age": 35, "monthly_charges": 850.0, "tenure_months": 12}'
+cd ..
 ```
 
-Or use **Docker Compose** for everything at once:
+For the FastAPI app:
+```bash
+cd app
+pip install -r requirements.txt
+cd ..
+```
+
+For the Streamlit dashboard:
+```bash
+cd streamlit_app
+pip install -r requirements.txt
+cd ..
+```
+
+---
+
+### Step 4: Set Up PostgreSQL Database
+
+1. **Create a new database:**
+```bash
+   psql -U postgres -c "CREATE DATABASE telecom_churn;"
+```
+
+2. **Apply the warehouse schema:**
+```bash
+   psql -U postgres -d telecom_churn -f sql_script/01_schema.sql
+   psql -U postgres -d telecom_churn -f sql_script/02_views_and_procedures.sql
+   psql -U postgres -d telecom_churn -f sql_script/03_analytics_queries.sql
+```
+
+3. **Verify tables were created:**
+```bash
+   psql -U postgres -d telecom_churn -c "\dt churn.*"
+```
+
+---
+
+### Step 5: Configure Environment Variables
+
+**ETL Configuration (`etl/config/.env`):**
+```bash
+cp etl/config/.env.example etl/config/.env
+```
+
+Edit `etl/config/.env` and set:
+```env
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_NAME=telecom_churn
+DB_SCHEMA=churn
+
+# CSV Path
+CSV_PATH=etl/data/telecom_churn.csv
+
+# Logging
+LOG_LEVEL=INFO
+LOGS_DIR=etl/logs
+
+# Reports
+REPORTS_DIR=etl/reports
+
+# ETL Config
+DROP_INVALID_ROWS=True
+SNAPSHOT_DATE=2024-01-01
+BULK_INSERT_BATCH_SIZE=5000
+```
+
+**FastAPI Configuration (`app/.env`):**
+```bash
+cp app/.env.example app/.env
+```
+
+Edit `app/.env` and set:
+```env
+HOST=0.0.0.0
+PORT=8000
+MODEL_PATH=telecom_churn_pipeline.joblib
+METADATA_PATH=../model_metadata.json
+LOG_LEVEL=INFO
+ENVIRONMENT=development
+```
+
+---
+
+### Step 6: Train and Export the Model (Optional)
+
+The pre-trained model is included at `app/telecom_churn_pipeline.joblib`. To retrain:
 
 ```bash
-docker-compose -f docker/docker-compose.yml up --build
-# FastAPI  → http://localhost:8000/docs
-# Streamlit → http://localhost:8501
+python train_and_export_model.py
 ```
 
----
-
-## 📂 Project Files Explained
-
-| File | Purpose | Key Techniques |
-|---|---|---|
-| `notebooks/telecom_churn_analysis.ipynb` | Main ML notebook — EDA → Feature Eng. → Training → Evaluation | LightGBM, SHAP, Optuna, SMOTE |
-| `sql/create_tables.sql` | PostgreSQL schema with partitioning & indexing | Range partitioning, B-tree indexes |
-| `sql/feature_views.sql` | Pre-computed feature views for fast querying | Window functions, CTEs |
-| `sql/churn_analysis_queries.sql` | Business intelligence queries | Cohort analysis, RFM |
-| `api/main.py` | FastAPI REST API serving model predictions | Async endpoints, middleware |
-| `api/predictor.py` | Model loading & inference engine | Feature pre-processing, threshold |
-| `dashboard/streamlit_app.py` | Interactive churn explorer | Charts, SHAP waterfall plots |
-| `bi_dashboards/` | Executive BI dashboards | KPI cards, drill-through |
+This will:
+- Load the notebook's ML pipeline
+- Train on the full dataset
+- Export to `app/telecom_churn_pipeline.joblib`
+- Save metadata to `model_metadata.json`
 
 ---
+
+### Step 7: Run the Jupyter Notebook
+
+```bash
+jupyter lab telecom_churn_analysis.ipynb
+```
+
+The notebook runs through 15 phases:
+1. Project setup
+2. Business understanding
+3. Data understanding
+4. EDA
+5. Feature engineering
+6. Preprocessing
+7. Data balancing experiment (8 techniques)
+8. Model comparison bake-off (10 models)
+9. Hyperparameter optimization (Optuna)
+10. Model evaluation
+11. Feature importance
+12. SHAP explainability
+13. Learning curve validation
+14. Business insights
+15. Production deployment prep
+
+---
+
+### Step 8: Run the ETL Pipeline
+
+```bash
+cd etl
+python main.py
+```
+
+This will:
+- Extract the raw CSV from `data/telecom_churn.csv`
+- Validate each row (structural & business rules)
+- Clean and type data
+- Engineer 11 ML features
+- Load dimensions (telecom_partner, geography, customers with SCD-2 history)
+- Load facts (fact_usage with engineered features)
+- Post-load validation
+- Generate ETL report in `reports/etl_report_<timestamp>.json`
+
+---
+
+### Step 9: Run the FastAPI Server
+
+**Option A: Local development**
+```bash
+cd app
+uvicorn main:app --reload --port 8000
+```
+
+**Option B: With Docker Compose**
+```bash
+cd app
+docker-compose up --build
+```
+
+API will be available at:
+- **Swagger Docs:** http://localhost:8000/docs
+- **Health Check:** http://localhost:8000/health
+- **Prediction Endpoint:** http://localhost:8000/predict (POST)
+
+---
+
+### Step 10: Run the Streamlit Dashboard
+
+```bash
+cd streamlit_app
+streamlit run app.py
+```
+
+Streamlit will open at: `http://localhost:8501`
+
+---
+
+### Step 11: View BI Dashboards
+
+**Power BI:**
+```bash
+# Open Power BI Desktop and load:
+Dashboards/Power BI Dashboard.pbix
+```
+
+**Tableau:**
+```bash
+# Open Tableau Public/Desktop and load:
+Dashboards/Telecom_churn_dashboard_tableau.twb
+```
+
+**Excel:**
+```bash
+# Open Excel and load:
+Dashboards/Telecom_Churn_Dashboard_excel.xlsx
+```
+
+All dashboards read from the PostgreSQL warehouse populated by the ETL pipeline.
+
+---
+
+### 💡 Project Structure Quick Reference
+
+- **Notebook** → EDA, modeling, SHAP
+- **ETL Pipeline** → Extract, validate, clean, engineer features, load warehouse
+- **SQL Scripts** → Star-schema DDL, views, procedures
+- **Dashboards** → Power BI, Tableau, Excel (all query the warehouse)
+- **FastAPI** → Real-time predictions (serves the trained model)
+- **Streamlit** → Interactive prediction dashboard
 
 ## 🧠 ML Pipeline
 
 ```mermaid
 flowchart LR
-    A["📥 Raw Data\n243,553 rows\n28 features"] --> B["🧹 Data Cleaning\nMissing values\nType casting\nDuplicates"]
-    B --> C["🔍 EDA\nDistributions\nCorrelations\nChurn patterns"]
-    C --> D["⚙️ Feature Engineering\n11 new features\nEncoding\nScaling"]
-    D --> E["⚖️ SMOTE\n20%→50% churn\nOversampling"]
-    E --> F["🎛️ Optuna HPO\n100 trials\nTPE sampler"]
-    F --> G["🏆 LightGBM\nFinal model\nF1=0.62\nAUC=0.871"]
-    G --> H["🔬 SHAP\nExplainability\nFeature importance"]
-    H --> I["📦 Pickle\nModel artifact\n.pkl file"]
-    I --> J["⚡ FastAPI\nReal-time\ninference"]
-
-    style G fill:#1565c0,color:#fff
-    style E fill:#2e7d32,color:#fff
+    A[Data Understanding] --> B[EDA]
+    B --> C[Feature Engineering ]
+    C --> D[Preprocessing]
+    D --> E[Balancing Experiment\n8 techniques]
+    E --> F[Model Bake-off\n10 models]
+    F --> G[Optuna Tuning]
+    G --> H[Evaluation + SHAP]
+    H --> I[Business Insights]
 ```
-
+Notebook output artifacts (EDA charts, confusion matrix, ROC/PR curves, SHAP beeswarm & waterfall plots, learning curve) are saved under `CapturesGraphs/`.
+---
 ### Feature Engineering Details
 
 | Feature | Description | Type | Importance |
@@ -411,92 +489,6 @@ flowchart LR
 | `night_call_ratio` | Night calls / Total calls | Ratio | 🟢 Low |
 | `international_call_flag` | Has international calling | Binary | 🟢 Low |
 | `loyalty_tier` | Bronze/Silver/Gold/Platinum | Ordinal | 🟢 Low |
-
----
-
-## 📡 API Reference
-
-### Base URL
-```
-http://localhost:8000
-```
-
-### Endpoints
-
-#### `POST /predict` — Single Customer Prediction
-
-```bash
-curl -X POST "http://localhost:8000/predict" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "customer_id": "JIO_C001234",
-    "telecom_partner": "Reliance Jio",
-    "age": 32,
-    "monthly_charges": 849.0,
-    "tenure_months": 14,
-    "data_used_gb": 12.5,
-    "data_plan_gb": 20.0,
-    "call_failure_rate": 0.08,
-    "payment_delay_count": 2,
-    "service_calls_per_month": 1.5
-  }'
-```
-
-**Response:**
-```json
-{
-  "customer_id": "JIO_C001234",
-  "churn_probability": 0.73,
-  "churn_prediction": true,
-  "risk_tier": "HIGH",
-  "top_risk_factors": [
-    {"feature": "call_failure_rate", "shap_value": 0.21},
-    {"feature": "payment_delay_count", "shap_value": 0.18},
-    {"feature": "data_usage_ratio", "shap_value": 0.14}
-  ],
-  "recommended_action": "Immediate retention call + data plan upgrade offer",
-  "model_version": "lgbm_v2.1",
-  "inference_time_ms": 23
-}
-```
-
-#### `POST /predict/batch` — Batch Prediction (up to 10,000 records)
-
-```bash
-curl -X POST "http://localhost:8000/predict/batch" \
-  -H "Content-Type: application/json" \
-  -d '{"customers": [...]}'
-```
-
-#### `GET /health` — Health Check
-
-```bash
-curl http://localhost:8000/health
-# {"status": "healthy", "model_loaded": true, "version": "2.1.0"}
-```
-
-#### `GET /model/info` — Model Metadata
-
-```bash
-curl http://localhost:8000/model/info
-# {"model_type": "LightGBM", "f1_score": 0.623, "roc_auc": 0.871, ...}
-```
-
-#### `GET /features/importance` — Feature Importance
-
-```bash
-curl http://localhost:8000/features/importance
-```
-
-#### `POST /explain` — SHAP Explanation for a Customer
-
-```bash
-curl -X POST "http://localhost:8000/explain" \
-  -H "Content-Type: application/json" \
-  -d '{"customer_id": "JIO_C001234", ...}'
-```
-
-> 📖 Full interactive docs available at `/docs` (Swagger UI) and `/redoc`
 
 ---
 
@@ -523,33 +515,7 @@ curl -X POST "http://localhost:8000/explain" \
 
 ### Tableau Dashboard
 > 📈 Features: Cohort analysis, RFM segmentation scatter plot, churn funnel, feature importance bar chart.
-
 ---
-
-## 🛠️ Technology Stack
-
-| Category | Technology | Version | Purpose |
-|---|---|---|---|
-| **Language** | Python | 3.10+ | Core development |
-| **ML Framework** | LightGBM | 3.3.5 | Gradient boosting model |
-| **ML Utilities** | Scikit-learn | 1.3+ | Pipeline, metrics, preprocessing |
-| **Imbalance** | Imbalanced-learn | 0.11 | SMOTE & 7 other techniques |
-| **Explainability** | SHAP | 0.43 | Model interpretability |
-| **HPO** | Optuna | 3.4 | Automated hyperparameter search |
-| **Data** | Pandas, NumPy | 2.x, 1.x | Data manipulation |
-| **Visualization** | Matplotlib, Seaborn, Plotly | Latest | EDA & charts |
-| **API** | FastAPI | 0.104 | REST API framework |
-| **API Server** | Uvicorn | 0.24 | ASGI server |
-| **UI** | Streamlit | 1.28 | Interactive dashboard |
-| **Database** | PostgreSQL | 15 | Data warehouse |
-| **ORM** | SQLAlchemy | 2.0 | Database ORM |
-| **BI** | Power BI | Desktop | Executive dashboards |
-| **BI** | Tableau | 2023.3 | Analyst dashboards |
-| **Container** | Docker, Docker Compose | Latest | Deployment |
-| **Notebooks** | Jupyter Lab | 4.x | Interactive analysis |
-
----
-
 ## 💡 Business Insights
 
 ### 🔑 Finding 1: Call Quality Drives Churn More Than Price
@@ -565,61 +531,6 @@ curl -X POST "http://localhost:8000/explain" \
 > **BSNL customers churn at 28.3%** (vs. 15.1% for Jio), primarily driven by data speed dissatisfaction in rural areas. Vodafone churn is concentrated in the 25-35 age bracket due to price sensitivity vs. Jio competition.
 
 ---
-
-## 🎤 Interview Q&A
-
-<details>
-<summary><b>Q1: Why LightGBM over XGBoost?</b></summary>
-
-**A:** LightGBM uses **leaf-wise tree growth** vs. XGBoost's level-wise approach, making it significantly faster on large datasets (243K rows). In our benchmark, LightGBM trained in 12s vs. 28s for XGBoost with comparable or better AUC (0.871 vs. 0.864). LightGBM also handles categorical features natively and requires less memory — critical for production deployments. The F1 improvement (0.623 vs. 0.614) justified the choice for our imbalanced classification task.
-
-</details>
-
-<details>
-<summary><b>Q2: How did you handle the 20% class imbalance?</b></summary>
-
-**A:** We systematically evaluated **8 balancing strategies**: SMOTE, ADASYN, BorderlineSMOTE, SMOTEENN (hybrid), SMOTETomek (hybrid), Random Oversampling, NearMiss, and Random Undersampling. SMOTE won with F1=0.623. We chose SMOTE because it **generates synthetic minority samples** in feature space rather than duplicating real ones, providing better generalization. We also tuned the sampling ratio to 50:50 rather than matching majority class exactly, preventing over-correction.
-
-</details>
-
-<details>
-<summary><b>Q3: Why F1-Score as primary metric instead of Accuracy?</b></summary>
-
-**A:** With 20.05% churn rate, **accuracy is misleading** — a model predicting "no churn" for everyone achieves 79.95% accuracy but is useless. F1-Score balances Precision (of predicted churners, how many actually churn?) and Recall (of actual churners, how many did we catch?). For this business problem, missing a churner (False Negative) costs ₹~8,500 ARPU; false alarms (False Positives) cost ~₹500 in unnecessary retention offers. F1 at threshold 0.42 (optimized for this cost ratio) captures this trade-off correctly.
-
-</details>
-
-<details>
-<summary><b>Q4: How does Optuna improve over GridSearchCV?</b></summary>
-
-**A:** GridSearchCV evaluates **all combinations exhaustively**, scaling exponentially with parameters (e.g., 5 params × 5 values = 3,125 fits). Optuna uses **Tree-structured Parzen Estimator (TPE)** — a Bayesian optimization that learns which parameter regions are promising and samples there more densely. In 100 trials, Optuna found a better solution than 500-trial GridSearch would, in 40% of the time. It also supports early stopping via pruning (MedianPruner), stopping unpromising trials mid-training.
-
-</details>
-
-<details>
-<summary><b>Q5: How do SHAP values help in production?</b></summary>
-
-**A:** SHAP (SHapley Additive exPlanations) values assign each feature a contribution to the prediction for **each individual customer**. In production, this enables: (1) **Actionable recommendations** — "This customer is at risk primarily due to high call failure rate → escalate to network team"; (2) **Regulatory compliance** — explain AI decisions to customers or regulators; (3) **Trust building** — customer service agents understand and trust predictions; (4) **Model debugging** — detect data drift when feature importances shift. We serve SHAP values via the `/explain` endpoint.
-
-</details>
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-```bash
-# Quick contribution workflow
-git fork https://github.com/Tavishi-Jain/telecom-churn-prediction
-git checkout -b feature/your-amazing-feature
-git commit -m "feat: add amazing feature"
-git push origin feature/your-amazing-feature
-# Open a Pull Request
-```
-
----
-
 ## 📄 License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
@@ -632,9 +543,9 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 **Built with ❤️ for the Indian Telecom Industry**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/Tavishi-Jain)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/Tavishi-Jain)
-[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](mailto:your.email@example.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/Atiksh-Sharma)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/atim45)
+[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](atikshsharma517@gmail.com)
 
 *If this project helped you, please consider giving it a ⭐ star!*
 
@@ -645,3 +556,4 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 <div align="center">
 <sub>Made with Python 🐍 | Data from Indian Telecom Industry | Predictions powered by LightGBM 🌲</sub>
 </div>
+
