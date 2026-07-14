@@ -115,6 +115,8 @@ API Endpoints    6 REST endpoints, <50ms p99 latency
 
 ## Folder Structure
 
+```text
+
 Data_analytics_telecom_churn/
 │
 ├── app/                                    # FastAPI application
