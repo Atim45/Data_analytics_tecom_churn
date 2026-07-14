@@ -1,0 +1,236 @@
+# ============================================================
+# Telecom Customer Churn Prediction — .gitignore
+# ============================================================
+
+# ─── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+MANIFEST
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.pyo
+*.pyd
+
+# ─── Virtual Environments ────────────────────────────────────
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
+Pipfile.lock
+poetry.lock
+
+# ─── Jupyter Notebooks ───────────────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+*.ipynb_checkpoints
+# Keep notebooks but ignore outputs if desired:
+# *.ipynb    # Uncomment to ignore all notebooks
+
+# ─── Data Files (Do NOT commit raw data) ────────────────────
+data/raw/
+data/processed/
+data/external/
+*.csv
+*.tsv
+*.xlsx
+*.xls
+!bi_dashboards/telecom_churn_excel.xlsx   # Keep dashboard Excel
+*.parquet
+*.feather
+*.arrow
+*.h5
+*.hdf5
+*.json.gz
+*.pkl.gz
+
+# ─── Model Artifacts (large files) ──────────────────────────
+models/*.pkl
+models/*.bin
+models/*.joblib
+models/*.cbm
+models/*.onnx
+models/checkpoints/
+!models/.gitkeep
+
+# ─── Logs ───────────────────────────────────────────────────
+logs/
+*.log
+*.log.*
+log/
+mlruns/
+wandb/
+optuna_studies/
+*.sqlite
+*.sqlite3
+!sql/  # Keep SQL scripts
+
+# ─── Environment Variables & Secrets ────────────────────────
+.env
+.env.*
+!.env.example
+*.env
+secrets.yaml
+secrets.json
+credentials.json
+service_account.json
+*_key.json
+*.pem
+*.key
+*.cert
+*.p12
+config/local_*.yaml
+
+# ─── IDE / Editor ───────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*.orig
+.DS_Store
+Thumbs.db
+desktop.ini
+*.sublime-project
+*.sublime-workspace
+*.komodo-project
+.spyderproject.cfg
+.spyproject/
+.ropeproject/
+
+# ─── Operating System ───────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# ─── Docker ─────────────────────────────────────────────────
+docker/*.env
+docker/postgres-data/
+docker/volumes/
+
+# ─── Database ───────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+pgdata/
+postgres-data/
+
+# ─── Testing ────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+test-results/
+*.test.db
+
+# ─── Documentation Build ────────────────────────────────────
+docs/_build/
+docs/site/
+site/
+.mkdocs-material-cache/
+
+# ─── Profiling & Benchmarks ─────────────────────────────────
+*.prof
+*.lprof
+profile_output/
+benchmarks/results/
+
+# ─── MLflow / DVC / Optuna ──────────────────────────────────
+mlruns/
+mlartifacts/
+.dvc/
+.dvcignore
+optuna_journal.log
+optuna.db
+study.pkl
+
+# ─── Streamlit ──────────────────────────────────────────────
+.streamlit/secrets.toml
+
+# ─── FastAPI / Uvicorn ──────────────────────────────────────
+.uvicorn_pid
+
+# ─── Power BI & Tableau ─────────────────────────────────────
+# Include .pbix and .twbx files (they are the outputs)
+# Exclude auto-generated temp files
+*.pbix.lock
+*.twbx.lock
+~*.pbix
+~*.twbx
+
+# ─── Compressed Archives ────────────────────────────────────
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.gz
+!requirements*.txt.gz
+
+# ─── Node (if any frontend tooling) ────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# ─── Temporary Files ────────────────────────────────────────
+tmp/
+temp/
+.tmp/
+*.tmp
+*.bak
+*.swp
+*~
+
+# ─── Output Files ───────────────────────────────────────────
+outputs/
+figures/
+plots/
+exports/
+reports/generated/
+
+# ─── Cache ──────────────────────────────────────────────────
+.cache/
+.mypy_cache/
+.ruff_cache/
+.black_cache/
+__pypackages__/
+
+# ─── Google Colab ───────────────────────────────────────────
+.colab/
+
+# ─── Keep These Directories (with .gitkeep) ─────────────────
+# !models/.gitkeep
+# !data/.gitkeep
+# !logs/.gitkeep
+# !outputs/.gitkeep
+
+catboost_info/
+logs/
+reports/

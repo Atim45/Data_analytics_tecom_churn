@@ -1,0 +1,95 @@
+version: "3.9"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Shared network
+# ──────────────────────────────────────────────────────────────────────────────
+networks:
+  churn_net:
+    driver: bridge
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Shared volumes
+# ──────────────────────────────────────────────────────────────────────────────
+volumes:
+  redis_data:
+  api_logs:
+
+services:
+
+  # ── FastAPI application ────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    image: telecom-churn-api:1.0.0
+    container_name: churn_api
+    restart: unless-stopped
+    env_file:
+      - .env.example            # swap to .env in production
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - WORKERS=2
+      - MODEL_PATH=/models/telecom_churn_pipeline.joblib
+      - METADATA_PATH=/models/model_metadata.json
+      - REDIS_URL=redis://redis:6379
+      - LOG_LEVEL=INFO
+      - LOG_JSON_CONSOLE=true
+      - CORS_ORIGINS=http://localhost:8501,http://streamlit:8501
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount the model and metadata from the parent directory (read-only)
+      - type: bind
+        source: ..
+        target: /models
+        read_only: true
+      - api_logs:/app/logs
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - churn_net
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # ── Redis (rate-limit backing store) ──────────────────────────────────────
+  redis:
+    image: redis:7.2-alpine
+    container_name: churn_redis
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    networks:
+      - churn_net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ── Nginx reverse proxy ────────────────────────────────────────────────────
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: churn_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - api
+    networks:
+      - churn_net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
