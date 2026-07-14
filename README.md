@@ -13,12 +13,12 @@
 In India's hyper-competitive telecom market, customer churn directly erodes Monthly Recurring Revenue. With Reliance Jio, Airtel, Vodafone, and BSNL competing for every subscriber, understanding *who* churns and *why* is the first step toward retention.
 
 This project builds a **production-grade churn prediction system** that:
-- 🔮 **Predicts** which of 243,553 subscribers will churn in the next 30 days
-- 🧠 **Explains** *why* each customer is at risk using SHAP values
-- ⚡ **Serves predictions** in real-time via a FastAPI REST endpoint
-- 📊 **Visualizes insights** through Power BI, Tableau, and Streamlit dashboards
-- 🗄️ **Persists all data** in a PostgreSQL data warehouse
-- 🐳 **Deploys** everything via Docker for reproducible, scalable inference
+-  **Predicts** which of 243,553 subscribers will churn in the next 30 days
+-  **Explains** *why* each customer is at risk using SHAP values
+-  **Serves predictions** in real-time via a FastAPI REST endpoint
+-  **Visualizes insights** through Power BI, Tableau, and Streamlit dashboards
+-  **Persists all data** in a PostgreSQL data warehouse
+-  **Deploys** everything via Docker for reproducible, scalable inference
 
 This project analyzes **243,553 Indian telecom subscribers** end-to-end across three connected pathways:
 
@@ -28,7 +28,7 @@ This project analyzes **243,553 Indian telecom subscribers** end-to-end across t
 
 ```mermaid
 flowchart LR
-    A[("📄 Raw Telecom CSV\n243,553 rows")] --> B["📓 Notebook\nEDA · Modeling · SHAP"]
+    A[("📄 Raw Telecom CSV\n243,553 rows")] --> B[" Notebook\nEDA · Modeling · SHAP"]
     A --> C["etl/ pipeline"]
     C --> D[("PostgreSQL\nStar-Schema Warehouse")]
     D --> E["Power BI"]
@@ -36,7 +36,7 @@ flowchart LR
     D --> G["Excel"]
 ```
 ---
-## 📑 Table of Contents
+## Table of Contents
 
 - [Project Overview]
 - [Key Results]
@@ -56,7 +56,7 @@ flowchart LR
 
 <div align="center">
 
-### 🏆 Model Performance Summary
+###  Model Performance Summary
 
 | Metric | Score | Benchmark |
 |---|---|---|
@@ -69,7 +69,7 @@ flowchart LR
 
 </div>
 
-### 🔢 Project Scale
+###  Project Scale
 
 ```
 
@@ -83,33 +83,33 @@ HPO Trials       100 Optuna trials, TPE sampler
 API Endpoints    6 REST endpoints, <50ms p99 latency
 
 ```
-### 📊 Balancing Technique Leaderboard
+###  Balancing Technique Leaderboard
 
 | Rank | Technique | F1-Score | ROC-AUC | Notes |
 |---|---|---|---|---|
-| 🥇 1 | **SMOTE** | **0.623** | **0.871** | Best overall balance |
-| 🥈 2 | ADASYN | 0.611 | 0.862 | Adaptive focus |
-| 🥉 3 | BorderlineSMOTE | 0.608 | 0.858 | Boundary-focused |
+| 1 | **SMOTE** | **0.623** | **0.871** | Best overall balance |
+| 2 | ADASYN | 0.611 | 0.862 | Adaptive focus |
+| 3 | BorderlineSMOTE | 0.608 | 0.858 | Boundary-focused |
 | 4 | SMOTEENN | 0.601 | 0.854 | Hybrid clean |
 | 5 | SMOTETomek | 0.598 | 0.849 | Hybrid clean |
 | 6 | Random Oversampling | 0.578 | 0.834 | Simple baseline |
 | 7 | NearMiss | 0.554 | 0.812 | Undersampling |
 | 8 | Random Undersampling | 0.531 | 0.798 | Fastest, worst |
 
-### 🤖 Model Comparison Leaderboard (with SMOTE)
+###  Model Comparison Leaderboard (with SMOTE)
 
 | Rank | Model | F1 | AUC | Train Time |
 |---|---|---|---|---|
-| 🥇 | **LightGBM** | **0.623** | **0.871** | 12s |
-| 🥈 | XGBoost | 0.614 | 0.864 | 28s |
-| 🥉 | CatBoost | 0.609 | 0.861 | 35s |
-| 4 | Random Forest | 0.589 | 0.843 | 48s |
-| 5 | MLP | 0.572 | 0.831 | 62s |
-| 6 | SVM | 0.554 | 0.819 | 180s |
-| 7 | Logistic Regression | 0.521 | 0.801 | 3s |
-| 8 | Decision Tree | 0.498 | 0.762 | 4s |
-| 9 | KNN | 0.481 | 0.748 | 8s |
-| 10 | Naive Bayes | 0.443 | 0.712 | 1s |
+|  | **LightGBM** | **0.623** | **0.871** | 12s |
+| | XGBoost | 0.614 | 0.864 | 28s |
+|  | CatBoost | 0.609 | 0.861 | 35s |
+|  | Random Forest | 0.589 | 0.843 | 48s |
+|  | MLP | 0.572 | 0.831 | 62s |
+|  | SVM | 0.554 | 0.819 | 180s |
+|  | Logistic Regression | 0.521 | 0.801 | 3s |
+|  | Decision Tree | 0.498 | 0.762 | 4s |
+|  | KNN | 0.481 | 0.748 | 8s |
+|  | Naive Bayes | 0.443 | 0.712 | 1s |
 
 ---
 
@@ -452,7 +452,7 @@ All dashboards read from the PostgreSQL warehouse populated by the ETL pipeline.
 
 ---
 
-### 💡 Project Structure Quick Reference
+###  Project Structure Quick Reference
 
 - **Notebook** → EDA, modeling, SHAP
 - **ETL Pipeline** → Extract, validate, clean, engineer features, load warehouse
@@ -461,7 +461,7 @@ All dashboards read from the PostgreSQL warehouse populated by the ETL pipeline.
 - **FastAPI** → Real-time predictions (serves the trained model)
 - **Streamlit** → Interactive prediction dashboard
 
-## 🧠 ML Pipeline
+##  ML Pipeline
 
 ```mermaid
 flowchart LR
@@ -494,59 +494,49 @@ Notebook output artifacts (EDA charts, confusion matrix, ROC/PR curves, SHAP bee
 
 ---
 
-## 📊 Dashboards
+##  Dashboards
 
 ### Streamlit Dashboard
 
-> 🖼️ *Screenshot placeholder — run locally to see interactive dashboard*
+>  *Screenshot placeholder — run locally to see interactive dashboard*
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  🔮 Telecom Churn Predictor                    v2.1 | LIVE  │
-├──────────────────┬──────────────────┬────────────────────────┤
-│  📊 Churn Rate   │  ⚠️ High Risk    │  💰 Revenue at Risk    │
-│     20.05%       │   4,872 users    │   ₹4.13 Crore/month    │
-├──────────────────┴──────────────────┴────────────────────────┤
-│  SHAP Waterfall Plot      │  Risk Distribution by Partner    │
-│  [chart placeholder]      │  [chart placeholder]             │
-└───────────────────────────┴──────────────────────────────────┘
 ```
 
 ### Power BI Dashboard
-> 📊 Features: Executive KPI cards, churn by partner, time series trend, geographic heatmap, drill-through to individual customer profiles.
+>  Features: Executive KPI cards, churn by partner, time series trend, geographic heatmap, drill-through to individual customer profiles.
 
 ### Tableau Dashboard
-> 📈 Features: Cohort analysis, RFM segmentation scatter plot, churn funnel, feature importance bar chart.
+>  Features: Cohort analysis, RFM segmentation scatter plot, churn funnel, feature importance bar chart.
 ---
-## 💡 Business Insights
+##  Business Insights
 
-### 🔑 Finding 1: Call Quality Drives Churn More Than Price
+###  Finding 1: Call Quality Drives Churn More Than Price
 > **High call failure rate (>8%) is the single strongest churn predictor**, outweighing even monthly charges. A 1% improvement in call quality reduces churn probability by ~3.2 percentage points. Network investment delivers higher ROI than discounting.
 
-### 🔑 Finding 2: First 12 Months Are Critical
+###  Finding 2: First 12 Months Are Critical
 > **52% of all churn occurs in the first year** of subscription. Customers who survive 18 months have a <8% churn probability. Targeted onboarding programs and first-year loyalty rewards would have maximum impact.
 
-### 🔑 Finding 3: Payment Defaults Are Early Warning Signals
+###  Finding 3: Payment Defaults Are Early Warning Signals
 > Customers with **2+ payment delays in 6 months** have a 4.7× higher churn risk. A proactive payment assistance or plan-adjustment offer at the first delay could retain 28% of eventual churners.
 
-### 🔑 Finding 4: Partner-Specific Patterns
+###  Finding 4: Partner-Specific Patterns
 > **BSNL customers churn at 28.3%** (vs. 15.1% for Jio), primarily driven by data speed dissatisfaction in rural areas. Vodafone churn is concentrated in the 25-35 age bracket due to price sensitivity vs. Jio competition.
 
 ---
-## 📄 License
+##  License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 📬 Contact
+##  Contact
 
 <div align="center">
 
-**Built with ❤️ for the Indian Telecom Industry**
+**Built with love the Indian Telecom Industry**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/Atiksh-Sharma)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/atim45)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/atiksh-sharma-49b71437a/)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/Atim45)
 [![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail)](atikshsharma517@gmail.com)
 
 *If this project helped you, please consider giving it a ⭐ star!*
@@ -556,6 +546,6 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 ---
 
 <div align="center">
-<sub>Made with Python 🐍 | Data from Indian Telecom Industry | Predictions powered by LightGBM 🌲</sub>
+<sub>Made with Python  | Data from Indian Telecom Industry | Predictions powered by LightGBM </sub>
 </div>
 
